@@ -7,11 +7,15 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class TextFileManager 
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
+public class FileManager 
 {
 	private File file;
 	
-	public TextFileManager(String filePath)
+	
+	public FileManager(String filePath)
 	{
 		this.file = new File(filePath);
 		
@@ -118,6 +122,18 @@ public class TextFileManager
 		}
 		
 		return false;
+	}
+	
+	public void setImage(JFrame window, String filePath)
+	{
+		try 
+		{
+			window.setIconImage(ImageIO.read(new File(filePath)));
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
+		}
 	}
 	
 	// for developer use only

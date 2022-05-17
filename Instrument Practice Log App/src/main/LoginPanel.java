@@ -26,7 +26,7 @@ public class LoginPanel extends JPanel implements ActionListener
 	private JButton signup;
 	private JButton login;
 	private HashMap<String, String> loginInfo;
-	private TextFileManager textFileManager;
+	private FileManager textFileManager;
 	
 	private final String txtFile;
 	
@@ -40,7 +40,7 @@ public class LoginPanel extends JPanel implements ActionListener
 		loginWindow = frame;
 		loginInfo = new HashMap<String, String>();
 		txtFile = "login_info.txt";
-		textFileManager = new TextFileManager(txtFile);
+		textFileManager = new FileManager(txtFile);
 		textFileManager.fillHashMap(loginInfo);
 		//textFileManager.clearFile(); // (only use when need to clear file for development perpouses)
 		
