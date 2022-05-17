@@ -27,6 +27,8 @@ public class LoginPanel extends JPanel implements ActionListener
 	private JButton login;
 	private HashMap<String, String> loginInfo;
 	private FileManager textFileManager;
+	private String username;
+	private String password;
 	
 	private final String txtFile;
 	
@@ -108,7 +110,6 @@ public class LoginPanel extends JPanel implements ActionListener
 		login.setEnabled(false);
 		login.setBounds(usernameField.getX() + 85, usernameLabel.getY() + 120, 100, 30);
 		
-		
 		this.add(usernameLabel);
 		this.add(usernameField);
 		this.add(passwordLabel);
@@ -155,8 +156,8 @@ public class LoginPanel extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		String username = "";
-		String password = "";
+		username = "";
+		password = "";
 		
 		if (e.getSource() == signup)
 		{
@@ -170,10 +171,18 @@ public class LoginPanel extends JPanel implements ActionListener
 			}
 			else
 			{
-				loginInfo.put(username, password);
-				System.out.println(loginInfo);
-				
-				textFileManager.addToFile(username, password);
+				if (username.length() > 20)
+				{
+					JOptionPane usernameToLong = new JOptionPane();
+					JOptionPane.showMessageDialog(null, "Username is too long. Max username length is 20.", "Login Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+					loginInfo.put(username, password);
+					System.out.println(loginInfo);
+					
+					textFileManager.addToFile(username, password);
+				}
 			}
 		}
 		
@@ -185,7 +194,7 @@ public class LoginPanel extends JPanel implements ActionListener
 			if (loginInfo.containsKey(username) && loginInfo.containsValue(password))
 			{
 				loginWindow.setVisible(false);
-				InstrumentWindow instrumentWindow= new InstrumentWindow();
+				InstrumentWindow instrumentWindow= new InstrumentWindow(this);
 			}
 			else
 			{
@@ -193,5 +202,15 @@ public class LoginPanel extends JPanel implements ActionListener
 				JOptionPane.showMessageDialog(null, "Username or password is incorrect.", "Login Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
+	}
+	
+	public String getUsername()
+	{
+		return this.username;
+	}
+	
+	public String getPassword()
+	{
+		return this.password;
 	}
 }

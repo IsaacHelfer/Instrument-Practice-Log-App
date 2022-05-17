@@ -51,6 +51,16 @@ public class FileManager
 				String username = data.substring(0, data.indexOf("-"));
 				String password = data.substring(data.indexOf("-") + 1);
 				
+				if (username.contains(" "))
+				{
+					username.substring(0, username.indexOf(" "));
+				}
+				
+				if (password.contains(" "))
+				{
+					password.substring(0, password.indexOf(" "));
+				}
+				
 				hashMap.put(username, password);
 			}
 			
