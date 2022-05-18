@@ -1,20 +1,26 @@
-package main;
+package stopWatch;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 public class StopWatch
 {
 	private Timer timer;
 	private TimerTask timerTask;
+	private JTextField label;
 	private int seconds;
 	private int minutes;
 	private int hours;
+	private String time;
 	
-	public StopWatch(JLabel label)
+	private boolean stop = false;
+	
+	public StopWatch(JTextField label)
 	{
+		this.label = label;
+		
 		seconds = 0;
 		minutes = 0;
 		hours = 0;
@@ -36,7 +42,10 @@ public class StopWatch
 					minutes = 0;
 				}
 				
-				updateLabel(label, seconds, minutes, hours);
+				if (!stop)
+				{
+					updateLabel(label, seconds, minutes, hours);
+				}
 			}
 		};
 	}
@@ -48,15 +57,16 @@ public class StopWatch
 	
 	public void stop()
 	{
-		System.out.println("stop");
-	}
-	
-	public void restart()
-	{
+		this.stop = true;
 		
+		String time = label.getText();
+		
+		System.out.println(time);
+		
+		label.setText("");
 	}
 	
-	public void updateLabel(JLabel label, long seconds, int minutes, int hours)
+	public void updateLabel(JTextField label, long seconds, int minutes, int hours)
 	{
 		if (hours < 1)
 		{
@@ -73,5 +83,10 @@ public class StopWatch
 		{
 			label.setText(hours + ":" + minutes + "" + seconds);
 		}
+	}
+	
+	public String getTime()
+	{
+		return this.time;
 	}
 }

@@ -1,19 +1,22 @@
-package main;
+package stopWatch;
 
 import javax.swing.JFrame;
 
-public class InstrumentWindow extends JFrame
+import login.LoginPanel;
+import managers.FileManager;
+
+public class StopWatchWindow extends JFrame
 {
 	private final int WIDTH = 400;
 	private final int HEIGHT = 600;
-	private InstrumentPanel panel;
 	private String filePath;
 	private FileManager fileManager;
+	private StopWatchPanel panel;
 	
-	public InstrumentWindow(LoginPanel loginPanel)
+	public StopWatchWindow()
 	{
-		panel = new InstrumentPanel(this, loginPanel);
-		filePath = "assets/guitar.png";
+		panel = new StopWatchPanel();
+		filePath = "assets/clock.png";
 		fileManager = new FileManager(filePath);
 		fileManager.setImage(this, filePath);
 		

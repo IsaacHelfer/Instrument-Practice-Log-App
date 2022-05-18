@@ -1,6 +1,8 @@
-package main;
+package login;
 
 import javax.swing.JFrame;
+
+import managers.FileManager;
 
 public class LoginWindow extends JFrame
 {

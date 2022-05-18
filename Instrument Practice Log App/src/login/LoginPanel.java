@@ -1,20 +1,19 @@
-package main;
+package login;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+
+import instrument.InstrumentWindow;
+import managers.FileManager;
 
 public class LoginPanel extends JPanel implements ActionListener
 {
@@ -173,13 +172,11 @@ public class LoginPanel extends JPanel implements ActionListener
 			{
 				if (username.length() > 20)
 				{
-					JOptionPane usernameToLong = new JOptionPane();
 					JOptionPane.showMessageDialog(null, "Username is too long. Max username length is 20.", "Login Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else
 				{
 					loginInfo.put(username, password);
-					System.out.println(loginInfo);
 					
 					textFileManager.addToFile(username, password);
 				}
@@ -194,11 +191,10 @@ public class LoginPanel extends JPanel implements ActionListener
 			if (loginInfo.containsKey(username) && loginInfo.containsValue(password))
 			{
 				loginWindow.setVisible(false);
-				InstrumentWindow instrumentWindow= new InstrumentWindow(this);
+				InstrumentWindow instrumentWindow = new InstrumentWindow(this);
 			}
 			else
 			{
-				JOptionPane errorLogin = new JOptionPane();
 				JOptionPane.showMessageDialog(null, "Username or password is incorrect.", "Login Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
