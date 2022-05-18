@@ -37,6 +37,7 @@ public class LoginPanel extends JPanel implements ActionListener
 	public LoginPanel(LoginWindow frame)
 	{
 		this.setLayout(null);
+		this.requestFocus();
 		
 		loginWindow = frame;
 		loginInfo = new HashMap<String, String>();

@@ -61,8 +61,6 @@ public class StopWatch
 		
 		String time = label.getText();
 		
-		System.out.println(time);
-		
 		label.setText("");
 	}
 	
