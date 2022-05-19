@@ -81,7 +81,7 @@ public class StopWatchPanel extends JPanel implements ActionListener
 			endButton.setVisible(true);
 			backToHome.setVisible(false);
 		
-			stopWatch = new StopWatch(timeLabel, loginPanel.getUsername());
+			stopWatch = new StopWatch(timeLabel);
 			
 			stopWatch.start();
 		}

@@ -26,10 +26,12 @@ public class LoginPanel extends JPanel implements ActionListener
 	private JButton login;
 	private HashMap<String, String> loginInfo;
 	private FileManager textFileManager;
+	private FileManager logFileManager;
 	private String username;
 	private String password;
 	
-	private final String txtFile;
+	private String txtFile;
+	private String logPath;
 	
 	private boolean usernamePicked = false;
 	private boolean passwordPicked = false;
@@ -41,6 +43,7 @@ public class LoginPanel extends JPanel implements ActionListener
 		
 		loginWindow = frame;
 		loginInfo = new HashMap<String, String>();
+		
 		txtFile = "login_info.txt";
 		textFileManager = new FileManager(txtFile);
 		textFileManager.fillHashMap(loginInfo);
@@ -180,6 +183,9 @@ public class LoginPanel extends JPanel implements ActionListener
 					loginInfo.put(username, password);
 					
 					textFileManager.addToFile(username, password);
+					
+					logPath = "logs/" + username + "_log.txt";
+					logFileManager = new FileManager(logPath);
 				}
 			}
 		}

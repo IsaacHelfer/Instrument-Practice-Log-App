@@ -17,14 +17,13 @@ public class StopWatch
 	private int minutes;
 	private int hours;
 	private String time;
-	private String filePath;
 	
 	private boolean stop = false;
 	
-	public StopWatch(JTextField label, String username)
+	public StopWatch(JTextField label)
 	{
-		this.filePath = "logs/" + username + "_stop_watch_log.txt";
-		this.fileManager = new FileManager(filePath);
+		//fileManager = new FileManager();
+		// access log file for user
 		this.label = label;
 		
 		seconds = 0;
