@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import javax.swing.JTextField;
 
+import login.LoginPanel;
 import managers.FileManager;
 
 public class StopWatch
@@ -17,14 +18,16 @@ public class StopWatch
 	private int minutes;
 	private int hours;
 	private String time;
+	private String filePath;
 	
 	private boolean stop = false;
 	
-	public StopWatch(JTextField label)
+	public StopWatch(JTextField label, LoginPanel loginPanel)
 	{
-		//fileManager = new FileManager();
-		// access log file for user
 		this.label = label;
+		
+		this.filePath = loginPanel.getFilePath();
+		fileManager = new FileManager(filePath);
 		
 		seconds = 0;
 		minutes = 0;

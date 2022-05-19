@@ -56,6 +56,7 @@ public class LoginPanel extends JPanel implements ActionListener
 		usernameField.setBounds(usernameLabel.getX() + 80, usernameLabel.getY() - 9, 210, 30);
 		usernameField.setName("usernameField");
 		usernameField.getDocument().addDocumentListener((DocumentListener) new DocumentListener() {
+			// checking for changes of the username field
 			public void changedUpdate(DocumentEvent e) 
 			{
 				changed(usernameField);
@@ -81,6 +82,7 @@ public class LoginPanel extends JPanel implements ActionListener
 		passwordField.setName("passwordField");
 		passwordField.setBounds(passwordLabel.getX() + 80, usernameLabel.getY() + 40, 210, 30);
 		passwordField.getDocument().addDocumentListener((DocumentListener) new DocumentListener() {
+			// checking for changes of the password field
 			public void changedUpdate(DocumentEvent e) 
 			{
 				changed(passwordField);
@@ -169,7 +171,6 @@ public class LoginPanel extends JPanel implements ActionListener
 			
 			if (loginInfo.containsKey(username))
 			{
-				JOptionPane usernameAlreadyExists = new JOptionPane();
 				JOptionPane.showMessageDialog(null, "Username already exists.", "Login Error", JOptionPane.ERROR_MESSAGE);
 			}
 			else
@@ -180,6 +181,8 @@ public class LoginPanel extends JPanel implements ActionListener
 				}
 				else
 				{
+					JOptionPane.showMessageDialog(null, "Signup Successful", "Signup Successful", JOptionPane.INFORMATION_MESSAGE);
+					
 					loginInfo.put(username, password);
 					
 					textFileManager.addToFile(username, password);
@@ -215,5 +218,10 @@ public class LoginPanel extends JPanel implements ActionListener
 	public String getPassword()
 	{
 		return password;
+	}
+	
+	public String getFilePath()
+	{
+		return this.logPath;
 	}
 }

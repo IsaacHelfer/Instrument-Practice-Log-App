@@ -37,7 +37,8 @@ public class FileManager
 			e.printStackTrace();
 		}
 	}
-
+	
+	// filling the hash map with the login information in the "login_info.txt"
 	public void fillHashMap(HashMap<String, String> hashMap)
 	{
 		try
