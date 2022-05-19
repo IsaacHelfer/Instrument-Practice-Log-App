@@ -107,6 +107,20 @@ public class FileManager
 		}
 	}
 	
+	public void addTimeToFile(String time)
+	{
+		try 
+		{
+			FileWriter fileEditor = new FileWriter(file, true);
+			fileEditor.write(time + "\n");
+			fileEditor.close();
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	}
+	
 	public boolean contains(String value)
 	{
 		try

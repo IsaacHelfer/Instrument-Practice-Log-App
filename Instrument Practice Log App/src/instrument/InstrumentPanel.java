@@ -1,26 +1,26 @@
 package instrument;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import login.LoginPanel;
 import stopWatch.StopWatchWindow;
 
 public class InstrumentPanel extends JPanel implements ActionListener
 {
 	private InstrumentWindow instrumentWindow;
+	private LoginPanel loginPanel;
 	private JButton stopWatch;
 	
-	public InstrumentPanel(InstrumentWindow window)
+	public InstrumentPanel(InstrumentWindow window, LoginPanel loginPanel)
 	{	
-		instrumentWindow = window;
+		this.instrumentWindow = window;
+		this.loginPanel = loginPanel;
 		
 		this.setLayout(new FlowLayout(FlowLayout.CENTER));
 		this.requestFocus();
@@ -39,6 +39,6 @@ public class InstrumentPanel extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		instrumentWindow.setVisible(false);
-		new StopWatchWindow(instrumentWindow);
+		new StopWatchWindow(instrumentWindow, loginPanel);
 	}
 }

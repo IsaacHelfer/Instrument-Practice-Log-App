@@ -1,8 +1,5 @@
 package instrument;
 
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-
 import javax.swing.JFrame;
 
 import login.LoginPanel;
@@ -18,7 +15,7 @@ public class InstrumentWindow extends JFrame
 	
 	public InstrumentWindow(LoginPanel loginPanel)
 	{
-		panel = new InstrumentPanel(this);
+		panel = new InstrumentPanel(this, loginPanel);
 		filePath = "assets/guitar.png";
 		fileManager = new FileManager(filePath);
 		fileManager.setImage(this, filePath);

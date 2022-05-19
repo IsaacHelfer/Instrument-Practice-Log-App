@@ -203,11 +203,11 @@ public class LoginPanel extends JPanel implements ActionListener
 	
 	public String getUsername()
 	{
-		return this.username;
+		return username;
 	}
 	
 	public String getPassword()
 	{
-		return this.password;
+		return password;
 	}
 }

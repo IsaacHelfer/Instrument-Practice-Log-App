@@ -1,7 +1,6 @@
 package stopWatch;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,20 +11,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import instrument.InstrumentWindow;
+import login.LoginPanel;
 
 public class StopWatchPanel extends JPanel implements ActionListener
 {
 	private StopWatchWindow stopWatchWindow;
 	private InstrumentWindow instrumentWindow;
+	private LoginPanel loginPanel;
 	private JButton startButton;
 	private JButton endButton;
+	private JButton backToHome;
 	private JTextField timeLabel;
 	private StopWatch stopWatch;
 	
-	public StopWatchPanel(StopWatchWindow stopWatchWindow, InstrumentWindow instrumentWindow)
+	public StopWatchPanel(StopWatchWindow stopWatchWindow, InstrumentWindow instrumentWindow, LoginPanel loginPanel)
 	{
 		this.stopWatchWindow = stopWatchWindow;
 		this.instrumentWindow = instrumentWindow;
+		this.loginPanel = loginPanel;
 		
 		this.setLayout(null);
 		this.requestFocus();
@@ -48,6 +51,15 @@ public class StopWatchPanel extends JPanel implements ActionListener
 		endButton.setBackground(Color.RED);
 		endButton.addActionListener(this);
 		
+		backToHome = new JButton();
+		backToHome.setText("Back To Home Page");
+		backToHome.setVisible(true);
+		backToHome.setFont(new Font("Comic Sans", Font.PLAIN, 17));
+		backToHome.setFocusable(false);
+		backToHome.setBounds(0, 312, 200, 50);
+		backToHome.setBackground(Color.RED);
+		backToHome.addActionListener(this);
+		
 		timeLabel = new JTextField();
 		timeLabel.setBounds(135, 0, 300, 100);
 		timeLabel.setFont(new Font("Comic Sans", Font.BOLD, 55));
@@ -56,6 +68,7 @@ public class StopWatchPanel extends JPanel implements ActionListener
 	
 		this.add(startButton);
 		this.add(endButton);
+		this.add(backToHome);
 		this.add(timeLabel);
 	}
 
@@ -66,8 +79,9 @@ public class StopWatchPanel extends JPanel implements ActionListener
 		{	
 			startButton.setVisible(false);
 			endButton.setVisible(true);
+			backToHome.setVisible(false);
 		
-			stopWatch = new StopWatch(timeLabel);
+			stopWatch = new StopWatch(timeLabel, loginPanel.getUsername());
 			
 			stopWatch.start();
 		}
@@ -78,7 +92,11 @@ public class StopWatchPanel extends JPanel implements ActionListener
 			
 			startButton.setVisible(true);
 			endButton.setVisible(false);
-			
+			backToHome.setVisible(true);
+		}
+		
+		if (e.getSource() == backToHome)
+		{
 			stopWatchWindow.setVisible(false);
 			instrumentWindow.setVisible(true);
 		}

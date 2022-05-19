@@ -5,20 +5,26 @@ import java.util.TimerTask;
 
 import javax.swing.JTextField;
 
+import managers.FileManager;
+
 public class StopWatch
 {
 	private Timer timer;
+	private FileManager fileManager;
 	private TimerTask timerTask;
 	private JTextField label;
 	private int seconds;
 	private int minutes;
 	private int hours;
 	private String time;
+	private String filePath;
 	
 	private boolean stop = false;
 	
-	public StopWatch(JTextField label)
+	public StopWatch(JTextField label, String username)
 	{
+		this.filePath = "logs/" + username + "_stop_watch_log.txt";
+		this.fileManager = new FileManager(filePath);
 		this.label = label;
 		
 		seconds = 0;
@@ -58,8 +64,10 @@ public class StopWatch
 	public void stop()
 	{
 		this.stop = true;
-		
+
 		String time = label.getText();
+		
+		fileManager.addTimeToFile(time);
 		
 		label.setText("");
 	}
