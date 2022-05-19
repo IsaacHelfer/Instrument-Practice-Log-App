@@ -1,2 +1,2 @@
-# Instrument-Practice-Log-App
+# Instrument Practice Log App
 AP CSA FINAL PROJECT
