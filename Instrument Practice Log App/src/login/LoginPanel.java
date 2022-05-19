@@ -15,6 +15,7 @@ import javax.swing.event.DocumentListener;
 import instrument.InstrumentWindow;
 import managers.FileManager;
 
+@SuppressWarnings("serial")
 public class LoginPanel extends JPanel implements ActionListener
 {
 	private LoginWindow loginWindow;
@@ -201,7 +202,7 @@ public class LoginPanel extends JPanel implements ActionListener
 			if (loginInfo.containsKey(username) && loginInfo.containsValue(password))
 			{
 				loginWindow.setVisible(false);
-				InstrumentWindow instrumentWindow = new InstrumentWindow(this);
+				InstrumentWindow instrumentWindow = new InstrumentWindow(loginWindow, this);
 			}
 			else
 			{

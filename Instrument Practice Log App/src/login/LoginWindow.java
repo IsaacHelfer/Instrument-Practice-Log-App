@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 
 import managers.FileManager;
 
+@SuppressWarnings("serial")
 public class LoginWindow extends JFrame
 {
 	private final int WIDTH = 400;

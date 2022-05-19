@@ -6,6 +6,7 @@ import instrument.InstrumentWindow;
 import login.LoginPanel;
 import managers.FileManager;
 
+@SuppressWarnings("serial")
 public class StopWatchWindow extends JFrame
 {
 	private String filePath;

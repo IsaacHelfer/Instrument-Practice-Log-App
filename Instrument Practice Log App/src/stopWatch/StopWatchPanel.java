@@ -13,6 +13,7 @@ import javax.swing.JTextField;
 import instrument.InstrumentWindow;
 import login.LoginPanel;
 
+@SuppressWarnings("serial")
 public class StopWatchPanel extends JPanel implements ActionListener
 {
 	private StopWatchWindow stopWatchWindow;
