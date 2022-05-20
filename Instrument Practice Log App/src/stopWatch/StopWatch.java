@@ -26,7 +26,7 @@ public class StopWatch
 	{
 		this.label = label;
 		
-		this.filePath = loginPanel.getFilePath();
+		this.filePath = loginPanel.getUsername() + "_log.txt";
 		fileManager = new FileManager(filePath);
 		
 		seconds = 0;

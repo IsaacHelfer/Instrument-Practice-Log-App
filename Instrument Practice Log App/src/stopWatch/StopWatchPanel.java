@@ -34,6 +34,12 @@ public class StopWatchPanel extends JPanel implements ActionListener
 		this.setLayout(null);
 		this.requestFocus();
 		
+		timeLabel = new JTextField();
+		timeLabel.setBounds(135, 0, 300, 100);
+		timeLabel.setFont(new Font("Comic Sans", Font.BOLD, 55));
+		timeLabel.setEditable(false);
+		timeLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+		
 		startButton = new JButton();
 		startButton.setText("START");
 		startButton.setVisible(true);
@@ -60,12 +66,6 @@ public class StopWatchPanel extends JPanel implements ActionListener
 		backToHome.setBounds(0, 312, 200, 50);
 		backToHome.setBackground(Color.RED);
 		backToHome.addActionListener(this);
-		
-		timeLabel = new JTextField();
-		timeLabel.setBounds(135, 0, 300, 100);
-		timeLabel.setFont(new Font("Comic Sans", Font.BOLD, 55));
-		timeLabel.setEditable(false);
-		timeLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
 	
 		this.add(startButton);
 		this.add(endButton);

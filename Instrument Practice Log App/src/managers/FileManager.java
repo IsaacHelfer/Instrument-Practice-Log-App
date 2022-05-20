@@ -33,7 +33,7 @@ public class FileManager
 		} 
 		catch (IOException e) 
 		{
-			
+			System.out.println("Error creating a new file...");
 			e.printStackTrace();
 		}
 	}
@@ -69,6 +69,7 @@ public class FileManager
 		}
 		catch (FileNotFoundException e)
 		{
+			System.out.println("Error filling hash map...");
 			e.printStackTrace();
 		}
 	}
@@ -90,6 +91,7 @@ public class FileManager
 		}
 		catch (FileNotFoundException e)
 		{
+			System.out.println("Error printing file contents...");
 			e.printStackTrace();
 		}
 	}
@@ -104,6 +106,7 @@ public class FileManager
 		}
 		catch (IOException e)
 		{
+			System.out.println("Error adding to file...");
 			e.printStackTrace();
 		}
 	}
@@ -118,6 +121,7 @@ public class FileManager
 		}
 		catch (IOException e)
 		{
+			System.out.println("Error adding time to file...");
 			e.printStackTrace();
 		}
 	}
@@ -143,6 +147,7 @@ public class FileManager
 		}
 		catch (FileNotFoundException e)
 		{
+			System.out.println("Error when checking for contatins...");
 			e.printStackTrace();
 		}
 		
@@ -157,6 +162,7 @@ public class FileManager
 		} 
 		catch (IOException e) 
 		{
+			System.out.println("Error setting image...");
 			e.printStackTrace();
 		}
 	}
