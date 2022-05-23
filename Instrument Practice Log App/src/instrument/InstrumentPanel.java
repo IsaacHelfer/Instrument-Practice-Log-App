@@ -1,30 +1,33 @@
 package instrument;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JViewport;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import login.LoginPanel;
 import login.LoginWindow;
+import managers.FileManager;
 import stopWatch.StopWatchWindow;
 
 @SuppressWarnings("serial")
 public class InstrumentPanel extends JPanel implements ActionListener
 {
 	private InstrumentWindow instrumentWindow;
+	private InstrumentPanel instrumentPanel;
 	private LoginWindow loginWindow;
 	private LoginPanel loginPanel;
+	private FileManager fileManager;
 	private JButton stopWatch;
 	private JButton logOut;
 	private JButton addLog;
@@ -32,12 +35,15 @@ public class InstrumentPanel extends JPanel implements ActionListener
 	private JTextArea logArea;
 	private JScrollPane logField;
 	private JViewport logFieldView;
+	private Timer timer;
 	
 	public InstrumentPanel(InstrumentWindow window, LoginWindow loginWindow, LoginPanel loginPanel)
 	{	
+		this.instrumentPanel = this;
 		this.instrumentWindow = window;
 		this.loginWindow = loginWindow;
 		this.loginPanel = loginPanel;
+		this.fileManager = new FileManager("logs/" + loginPanel.getUsername() + "_log.txt");
 		
 		this.setLayout(null);
 		this.requestFocus();
@@ -51,9 +57,9 @@ public class InstrumentPanel extends JPanel implements ActionListener
 		logOut.addActionListener(this);
 		
 		logArea = new JTextArea();
-		logArea.setText("test\ntest\ntest\ntest\ntest\ntest\ntest");
 		logArea.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		logArea.setFont(new Font("Comic Sans", Font.PLAIN, 30));
+		logArea.setEditable(false);
 		
 		logField = new JScrollPane(logArea);
 		logField.setBounds(60, 60, 270, 200);
@@ -83,6 +89,16 @@ public class InstrumentPanel extends JPanel implements ActionListener
 		stopWatch.setFocusable(false);
 		stopWatch.addActionListener(this);
 		
+		timer = new Timer(1000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fileManager.updateScrollField(logArea);
+			}
+    		
+    	});
+    	
+    	timer.start();
+		
 		this.add(stopWatch);
 		this.add(logOut);
 		this.add(logField);
@@ -95,14 +111,25 @@ public class InstrumentPanel extends JPanel implements ActionListener
 	{
 		if (e.getSource() == stopWatch)
 		{
-			instrumentWindow.setVisible(false);
-			new StopWatchWindow(instrumentWindow, loginPanel);
+			SwingUtilities.invokeLater(new Runnable() {
+			    public void run() {
+			    	timer.stop();
+			    	instrumentWindow.setVisible(false);
+			    	new StopWatchWindow(instrumentWindow, instrumentPanel, loginPanel);
+			    }
+			});
 		}
 		
 		if (e.getSource() == logOut)
 		{
+			timer.stop();
 			instrumentWindow.setVisible(false);
 			loginWindow.setVisible(true);
 		}
+	}
+	
+	public Timer getTimer()
+	{
+		return this.timer;
 	}
 }

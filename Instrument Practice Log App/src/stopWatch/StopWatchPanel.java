@@ -9,7 +9,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
+import instrument.InstrumentPanel;
 import instrument.InstrumentWindow;
 import login.LoginPanel;
 
@@ -18,6 +20,7 @@ public class StopWatchPanel extends JPanel implements ActionListener
 {
 	private StopWatchWindow stopWatchWindow;
 	private InstrumentWindow instrumentWindow;
+	private InstrumentPanel instrumentPanel;
 	private LoginPanel loginPanel;
 	private JButton startButton;
 	private JButton endButton;
@@ -25,11 +28,12 @@ public class StopWatchPanel extends JPanel implements ActionListener
 	private JTextField timeLabel;
 	private StopWatch stopWatch;
 	
-	public StopWatchPanel(StopWatchWindow stopWatchWindow, InstrumentWindow instrumentWindow, LoginPanel loginPanel)
+	public StopWatchPanel(StopWatchWindow stopWatchWindow, InstrumentWindow instrumentWindow, InstrumentPanel instrumentPanel, LoginPanel loginPanel)
 	{
 		this.stopWatchWindow = stopWatchWindow;
 		this.instrumentWindow = instrumentWindow;
 		this.loginPanel = loginPanel;
+		this.instrumentPanel = instrumentPanel;
 		
 		this.setLayout(null);
 		this.requestFocus();
@@ -77,14 +81,17 @@ public class StopWatchPanel extends JPanel implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		if (e.getSource() == startButton)
-		{	
-			startButton.setVisible(false);
-			endButton.setVisible(true);
-			backToHome.setVisible(false);
-		
-			stopWatch = new StopWatch(timeLabel, loginPanel);
+		{		
+			SwingUtilities.invokeLater(new Runnable() {
+			    public void run() {
+			    	startButton.setVisible(false);
+					endButton.setVisible(true);
+					backToHome.setVisible(false);
 			
-			stopWatch.start();
+					stopWatch = new StopWatch(timeLabel, loginPanel);
+					stopWatch.start();
+			    }
+			});
 		}
 		
 		if (e.getSource() == endButton)
@@ -98,6 +105,7 @@ public class StopWatchPanel extends JPanel implements ActionListener
 		
 		if (e.getSource() == backToHome)
 		{
+			instrumentPanel.getTimer().start();
 			stopWatchWindow.setVisible(false);
 			instrumentWindow.setVisible(true);
 		}

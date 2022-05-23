@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -18,6 +19,7 @@ import managers.FileManager;
 @SuppressWarnings("serial")
 public class LoginPanel extends JPanel implements ActionListener
 {
+	private LoginPanel loginPanel;
 	private LoginWindow loginWindow;
 	private JLabel usernameLabel;
 	private JLabel passwordLabel;
@@ -42,13 +44,15 @@ public class LoginPanel extends JPanel implements ActionListener
 		this.setLayout(null);
 		this.requestFocus();
 		
+		loginPanel = this;
+		
 		loginWindow = frame;
 		loginInfo = new HashMap<String, String>();
 		
 		txtFile = "login_info.txt";
 		textFileManager = new FileManager(txtFile);
 		textFileManager.fillHashMap(loginInfo);
-		//textFileManager.clearFile(); // (only use when need to clear file for development perpouses)
+		//textFileManager.clearFile(); // (only use when need to clear file for development purposes)
 		
 		usernameLabel = new JLabel("Username:");
 		usernameLabel.setBounds(40, 50, 62, 10);
@@ -201,8 +205,12 @@ public class LoginPanel extends JPanel implements ActionListener
 			
 			if (loginInfo.containsKey(username) && loginInfo.containsValue(password))
 			{
-				loginWindow.setVisible(false);
-				InstrumentWindow instrumentWindow = new InstrumentWindow(loginWindow, this);
+				SwingUtilities.invokeLater(new Runnable() {
+				    public void run() {
+				    	loginWindow.setVisible(false);
+				        new InstrumentWindow(loginWindow, loginPanel);
+				    }
+				});
 			}
 			else
 			{

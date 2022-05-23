@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class FileManager 
 {
@@ -163,6 +165,28 @@ public class FileManager
 		catch (IOException e) 
 		{
 			System.out.println("Error setting image...");
+			e.printStackTrace();
+		}
+	}
+	
+	public void updateScrollField(JTextArea textArea)
+	{
+		try
+		{
+			Scanner scan = new Scanner(file);
+			
+			while (scan.hasNextLine())
+			{
+				String data = scan.nextLine();
+				
+				textArea.append(data + "\n");
+			}
+			
+			scan.close();
+		}
+		catch (FileNotFoundException e)
+		{
+			System.out.println("Error printing file contents...");
 			e.printStackTrace();
 		}
 	}
