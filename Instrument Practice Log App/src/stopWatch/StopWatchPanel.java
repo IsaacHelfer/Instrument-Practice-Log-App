@@ -101,11 +101,12 @@ public class StopWatchPanel extends JPanel implements ActionListener
 			startButton.setVisible(true);
 			endButton.setVisible(false);
 			backToHome.setVisible(true);
+			
+			instrumentPanel.getFileManager().updateScrollField(instrumentPanel.getTextArea());
 		}
 		
 		if (e.getSource() == backToHome)
 		{
-			instrumentPanel.getTimer().start();
 			stopWatchWindow.setVisible(false);
 			instrumentWindow.setVisible(true);
 		}

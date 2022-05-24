@@ -186,7 +186,7 @@ public class FileManager
 		}
 		catch (FileNotFoundException e)
 		{
-			System.out.println("Error printing file contents...");
+			System.out.println("Error updating scroll field contents...");
 			e.printStackTrace();
 		}
 	}

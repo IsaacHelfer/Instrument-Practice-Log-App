@@ -1,5 +1,6 @@
 package stopWatch;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -25,7 +26,6 @@ public class StopWatch
 	public StopWatch(JTextField label, LoginPanel loginPanel)
 	{
 		this.label = label;
-		
 		this.filePath = "logs/" + loginPanel.getUsername() + "_log.txt";
 		fileManager = new FileManager(filePath);
 		

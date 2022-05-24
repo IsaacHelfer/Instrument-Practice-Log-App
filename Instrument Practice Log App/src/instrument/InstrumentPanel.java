@@ -35,7 +35,6 @@ public class InstrumentPanel extends JPanel implements ActionListener
 	private JTextArea logArea;
 	private JScrollPane logField;
 	private JViewport logFieldView;
-	private Timer timer;
 	
 	public InstrumentPanel(InstrumentWindow window, LoginWindow loginWindow, LoginPanel loginPanel)
 	{	
@@ -89,15 +88,7 @@ public class InstrumentPanel extends JPanel implements ActionListener
 		stopWatch.setFocusable(false);
 		stopWatch.addActionListener(this);
 		
-		timer = new Timer(1000, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				fileManager.updateScrollField(logArea);
-			}
-    		
-    	});
-    	
-    	timer.start();
+		fileManager.updateScrollField(logArea);
 		
 		this.add(stopWatch);
 		this.add(logOut);
@@ -113,7 +104,6 @@ public class InstrumentPanel extends JPanel implements ActionListener
 		{
 			SwingUtilities.invokeLater(new Runnable() {
 			    public void run() {
-			    	timer.stop();
 			    	instrumentWindow.setVisible(false);
 			    	new StopWatchWindow(instrumentWindow, instrumentPanel, loginPanel);
 			    }
@@ -122,14 +112,18 @@ public class InstrumentPanel extends JPanel implements ActionListener
 		
 		if (e.getSource() == logOut)
 		{
-			timer.stop();
 			instrumentWindow.setVisible(false);
 			loginWindow.setVisible(true);
 		}
 	}
 	
-	public Timer getTimer()
+	public FileManager getFileManager()
 	{
-		return this.timer;
+		return this.fileManager;
+	}
+	
+	public JTextArea getTextArea()
+	{
+		return this.logArea;
 	}
 }
