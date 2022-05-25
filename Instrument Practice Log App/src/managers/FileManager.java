@@ -16,7 +16,6 @@ public class FileManager
 {
 	private File file;
 	
-	
 	public FileManager(String filePath)
 	{
 		this.file = new File(filePath);
@@ -171,15 +170,20 @@ public class FileManager
 	
 	public void updateScrollField(JTextArea textArea)
 	{
+		int num = 1;
+		
 		try
 		{
+			textArea.setText("");
 			Scanner scan = new Scanner(file);
 			
 			while (scan.hasNextLine())
 			{
 				String data = scan.nextLine();
 				
-				textArea.append(data + "\n");
+				textArea.append("[" + num + "] " + data + "\n");
+				
+				num++;
 			}
 			
 			scan.close();
