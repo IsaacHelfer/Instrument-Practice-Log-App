@@ -67,7 +67,7 @@ public class StopWatchPanel extends JPanel implements ActionListener
 		backToHome.setVisible(true);
 		backToHome.setFont(new Font("Comic Sans", Font.PLAIN, 17));
 		backToHome.setFocusable(false);
-		backToHome.setBounds(0, 312, 200, 50);
+		backToHome.setBounds(185, 0, 200, 50);
 		backToHome.setBackground(Color.RED);
 		backToHome.addActionListener(this);
 	

@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -13,7 +12,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
-import javax.swing.Timer;
 
 import login.LoginPanel;
 import login.LoginWindow;
@@ -114,6 +112,16 @@ public class InstrumentPanel extends JPanel implements ActionListener
 		{
 			instrumentWindow.setVisible(false);
 			loginWindow.setVisible(true);
+		}
+		
+		if (e.getSource() == addLog)
+		{
+			System.out.println("add log");
+		}
+		
+		if (e.getSource() == removeLog)
+		{
+			System.out.println("remove log");
 		}
 	}
 	
